@@ -3,15 +3,14 @@
 
 def get_coordinate(registro):
     """
-    Retorna la coordenada del mapa desde una tupla (tesoro, coordenada).
+    #Retorna la coordenada del mapa desde una tupla (tesoro, coordenada).
 
     Args:
         registro: Una tupla con el formato (tesoro, coordenada)
-
-    Returns:
-        Un string con la coordenada del mapa
     """
-    pass  # Reemplazar con tu implementación
+
+    return registro[1]
+
 
 
 def convert_coordinate(coordenada):
@@ -24,7 +23,7 @@ def convert_coordinate(coordenada):
     Returns:
         Una tupla con los componentes individuales (ej: ("2", "A"))
     """
-    pass  # Reemplazar con tu implementación
+    return coordenada[0], coordenada[1]
 
 
 def create_record(registro_azara, registro_rui):
@@ -47,7 +46,24 @@ def create_record(registro_azara, registro_rui):
     Returns:
         Tupla combinada si las coordenadas coinciden, o "not a match" si no.
     """
-    pass  # Reemplazar con tu implementación
+    tesoro_azara = registro_azara[0]
+    coord_azara_str = registro_azara[1]
+
+    # 2. Convertimos la coordenada de Azara ("4B" -> ("4", "B"))
+    # para poder compararla con la de Rui
+    coord_azara_tupla = convert_coordinate(coord_azara_str)
+
+    # 3. Extraemos la coordenada de Rui (que está en el índice 1)
+    coord_rui = registro_rui[1]
+
+    # 4. Comparamos
+    if coord_azara_tupla == coord_rui:
+        # Si coinciden, creamos la gran tupla combinada
+        # (tesoro, coord_azara, ubicacion, coord_rui, cuadrante)
+        return tesoro_azara, coord_azara_str, registro_rui[0], registro_rui[1], registro_rui[2]
+    else:
+        # Si no coinciden
+        return "not a match"
 
 
 def sum_tuple(numeros):
@@ -68,7 +84,13 @@ def sum_tuple(numeros):
         sum_tuple((1, 2, 3, 4, 5)) -> 15
         sum_tuple(()) -> 0
     """
-    pass  # Reemplazar con tu implementación
+
+    total = 0
+
+    for n in numeros:
+        total = total + n
+
+    return total
 
 
 def count_occurrences(tupla, elemento):
@@ -89,8 +111,13 @@ def count_occurrences(tupla, elemento):
         count_occurrences((1, 2, 2, 3, 2), 2) -> 3
         count_occurrences(('a', 'b', 'a'), 'c') -> 0
     """
-    pass  # Reemplazar con tu implementación
+    cantidad = 0
 
+    for item in tupla:
+        if item == elemento:
+            cantidad = cantidad + 1
+
+    return cantidad
 
 def find_index(tupla, elemento):
     """
@@ -111,8 +138,11 @@ def find_index(tupla, elemento):
         find_index(('a', 'b', 'c', 'b'), 'b') -> 1
         find_index((1, 2, 3), 9) -> -1
     """
-    pass  # Reemplazar con tu implementación
+    for i in range(len(tupla)):
+        if tupla[i] == elemento:
+            return i
 
+    return -1
 
 def filter_positives(numeros):
     """
@@ -129,4 +159,14 @@ def filter_positives(numeros):
         filter_positives((-3, 1, 0, 5, -2, 7)) -> (1, 5, 7)
         filter_positives((-1, -2, -3)) -> ()
     """
-    pass  # Reemplazar con tu implementación
+    positivos_lista = []
+
+    # 2. Recorremos la tupla original
+    for n in numeros:
+        # 3. Verificamos la condición: que sea mayor a 0
+        if n > 0:
+            # Agregamos a nuestra lista temporal
+            positivos_lista.append(n)
+
+    # 4. Convertimos la lista de vuelta a tupla antes de retornar
+    return tuple(positivos_lista)

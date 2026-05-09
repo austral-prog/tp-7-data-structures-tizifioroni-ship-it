@@ -19,7 +19,11 @@ def clean_ingredients(nombre_plato, ingredientes):
     Returns:
         Una tupla (nombre_plato, set_de_ingredientes_sin_duplicados)
     """
-    pass  # Reemplazar con tu implementación
+    # Convertimos la lista de ingredientes a un set para borrar duplicados
+    set_ingredientes = set(ingredientes)
+
+    # Retornamos una tupla con el nombre y el nuevo set
+    return nombre_plato, set_ingredientes
 
 
 def check_drinks(nombre_bebida, ingredientes):
@@ -36,8 +40,13 @@ def check_drinks(nombre_bebida, ingredientes):
     Returns:
         String con el nombre de la bebida seguido de "Cocktail" o "Mocktail"
     """
-    pass  # Reemplazar con tu implementación
+    for ing in ingredientes:
+        # Si el ingrediente está en el set global ALCOHOLS
+        if ing in ALCOHOLS:
+            return f"{nombre_bebida} Cocktail"  # Retorno temprano
 
+        # Si terminó el bucle y ninguno era alcohol...
+    return f"{nombre_bebida} Mocktail"
 
 def unique_chars(texto):
     """
@@ -52,8 +61,7 @@ def unique_chars(texto):
     Ejemplo:
         unique_chars("hello") -> {'h', 'e', 'l', 'o'}
     """
-    pass  # Reemplazar con tu implementación
-
+    return set(texto)
 
 def sum_set(numeros):
     """
@@ -73,7 +81,12 @@ def sum_set(numeros):
         sum_set({1, 2, 3, 4}) -> 10
         sum_set(set()) -> 0
     """
-    pass  # Reemplazar con tu implementación
+    total = 0
+
+    for n in numeros:
+        total = total + n
+
+    return total
 
 
 def common_elements(set_a, set_b):
@@ -95,4 +108,13 @@ def common_elements(set_a, set_b):
         common_elements({1, 2, 3}, {2, 3, 4}) -> {2, 3}
         common_elements({1, 2}, {3, 4}) -> set()
     """
-    pass  # Reemplazar con tu implementación
+    comunes = set()
+
+    # Recorremos el primer conjunto
+    for elemento in set_a:
+        # Verificamos pertenencia en el segundo conjunto con 'in'
+        if elemento in set_b:
+            # Si está en ambos, lo agregamos al nuevo set
+            comunes.add(elemento)
+
+    return comunes
