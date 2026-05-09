@@ -124,19 +124,18 @@ def find_max_value(diccionario):
     Ejemplo:
         find_max_value({'John': 85, 'Emma': 92, 'Sophia': 78}) -> 'Emma'
     """
-    if len(diccionario) == 0:
+    if not diccionario:
         return ""
 
-    nombre_maximo = ""
-    puntaje_maximo = -1  # Empezamos con un valor muy bajo
+    max_nombre = None
+    max_puntaje = None
 
     for nombre, puntaje in diccionario.items():
-        # Si el puntaje actual es mayor al récord que teníamos
-        if puntaje > puntaje_maximo:
-            puntaje_maximo = puntaje
-            nombre_maximo = nombre
+        if max_puntaje is None or puntaje > max_puntaje:
+            max_puntaje = puntaje
+            max_nombre = nombre
 
-    return nombre_maximo
+    return max_nombre
 
 def reverse_dict(diccionario):
     """
